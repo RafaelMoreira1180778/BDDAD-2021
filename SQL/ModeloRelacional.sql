@@ -21,11 +21,9 @@ DROP TABLE Funcionario CASCADE CONSTRAINTS;
 DROP TABLE PedidoIntervencao CASCADE CONSTRAINTS;
 DROP TABLE Produto CASCADE CONSTRAINTS;
 CREATE TABLE Quarto (
-  Id                        varchar2(1) NOT NULL, 
+  Id                        number(2) GENERATED AS IDENTITY, 
   LotacaoMaxima             number(1) NOT NULL, 
-  TipoQuartoId              varchar2(1) NOT NULL, 
-  NumeroQuartoId            number(1) NOT NULL, 
-  NumeroQuartoNumAndar      number(1) NOT NULL, 
+  TipoQuartoId              number(1) NOT NULL, 
   NumeroQuartoNumSequencial number(3) NOT NULL, 
   NumeroQuartoAndarId       varchar2(1) NOT NULL, 
   PRIMARY KEY (Id));
@@ -36,16 +34,16 @@ CREATE TABLE NumeroQuarto (
   AndarId));
 CREATE TABLE Andar (
   Id     varchar2(1) NOT NULL, 
-  Nome   varchar2(3) NOT NULL, 
+  Nome   varchar2(20) NOT NULL, 
   Numero number(1) NOT NULL, 
   PRIMARY KEY (Id));
 CREATE TABLE TipoQuarto (
-  Id        varchar2(1) NOT NULL, 
-  Descricao varchar2(3), 
+  Id        number(1) GENERATED AS IDENTITY, 
+  Descricao varchar2(10), 
   PRIMARY KEY (Id));
 CREATE TABLE Preco (
   Valor        number(10), 
-  TipoQuartoId varchar2(1) NOT NULL, 
+  TipoQuartoId number(1) NOT NULL, 
   EpocaAnoId   varchar2(1) NOT NULL);
 CREATE TABLE EpocaAno (
   Id         varchar2(1) NOT NULL, 
@@ -54,8 +52,8 @@ CREATE TABLE EpocaAno (
   PRIMARY KEY (Id));
 CREATE TABLE Reserva (
   Id               varchar2(1) NOT NULL, 
-  ClienteNif       number(2) NOT NULL, 
-  QuartoId         varchar2(1) NOT NULL, 
+  ClienteNif       number(9) NOT NULL, 
+  QuartoId         number(2) NOT NULL, 
   DataInicio       date NOT NULL, 
   DataFim          date NOT NULL, 
   NumPessoas       number(1) NOT NULL, 
@@ -63,11 +61,10 @@ CREATE TABLE Reserva (
   DataCancelamento date NOT NULL, 
   PRIMARY KEY (Id));
 CREATE TABLE Cliente (
-  Nif      number(2) GENERATED AS IDENTITY, 
-  Nome     varchar2(2) NOT NULL, 
-  email    varchar2(3), 
-  Telefone number(2), 
-  ContaId  number(2) NOT NULL, 
+  Nif      number(9) GENERATED AS IDENTITY, 
+  Nome     varchar2(30) NOT NULL, 
+  email    varchar2(40), 
+  Telefone number(9), 
   PRIMARY KEY (Nif));
 CREATE TABLE Conta (
   ReservaId    varchar2(1) NOT NULL, 
@@ -81,16 +78,16 @@ CREATE TABLE Fatura (
   ContaReservaId varchar2(1) NOT NULL, 
   PRIMARY KEY (Id));
 CREATE TABLE Camareira (
-  FuncionarioNif number(10) NOT NULL, 
+  FuncionarioNif number(9) NOT NULL, 
   PRIMARY KEY (FuncionarioNif));
 CREATE TABLE FuncionarioRestauracao (
-  FuncionarioNif number(10) NOT NULL, 
+  FuncionarioNif number(9) NOT NULL, 
   PRIMARY KEY (FuncionarioNif));
 CREATE TABLE FuncionarioRececao (
-  FuncionarioNif number(10) NOT NULL, 
+  FuncionarioNif number(9) NOT NULL, 
   PRIMARY KEY (FuncionarioNif));
 CREATE TABLE FuncinarioManutencao (
-  FuncionarioNif     number(10) NOT NULL, 
+  FuncionarioNif     number(9) NOT NULL, 
   TelefoneManutencao number(9) NOT NULL, 
   NifResponsavel     number(10), 
   PRIMARY KEY (FuncionarioNif));
@@ -107,26 +104,26 @@ CREATE TABLE TipoPagamento (
 CREATE TABLE IntervencaoLimpeza (
   Id                  number(3) GENERATED AS IDENTITY, 
   Timestamp           timestamp(0) NOT NULL, 
-  CamareiraNif        number(10) NOT NULL, 
-  PedidoIntervencaoId number(3) NOT NULL, 
+  CamareiraNif        number(9) NOT NULL, 
+  PedidoIntervencaoId number(3), 
   PRIMARY KEY (Id));
 CREATE TABLE IntervencaoManutencao (
   Id                      number(3) GENERATED AS IDENTITY, 
   Timestamp               timestamp(0), 
-  FuncinarioManutencaoNif number(10) NOT NULL, 
+  FuncinarioManutencaoNif number(9) NOT NULL, 
   PedidoIntervencaoId     number(3) NOT NULL, 
   PRIMARY KEY (Id));
 CREATE TABLE DespesaFrigobar (
   Data                    date, 
   ContaReservaId          varchar2(1) NOT NULL, 
-  CamareiraFuncionarioNif number(10) NOT NULL, 
+  CamareiraFuncionarioNif number(9) NOT NULL, 
   ProdutoId               number(3) NOT NULL);
 CREATE TABLE Funcionario (
-  Nif      number(10) GENERATED AS IDENTITY, 
-  Nome     varchar2(10) NOT NULL, 
-  Morada   varchar2(20) NOT NULL, 
+  Nif      number(9) GENERATED AS IDENTITY, 
+  Nome     varchar2(30) NOT NULL, 
+  Morada   varchar2(60) NOT NULL, 
   Telefone number(9) NOT NULL, 
-  Email    varchar2(20) NOT NULL, 
+  Email    varchar2(40) NOT NULL, 
   PRIMARY KEY (Nif));
 CREATE TABLE PedidoIntervencao (
   Id        number(3) GENERATED AS IDENTITY, 
