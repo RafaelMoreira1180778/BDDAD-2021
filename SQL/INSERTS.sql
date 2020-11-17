@@ -11,25 +11,26 @@ VALUES (4, TO_DATE('2020/12/01', 'yyyy/mm/dd'), TO_DATE('2021/02/28', 'yyyy/mm/d
 --CLIENTES
 --NORTE
 INSERT INTO CLIENTE
-VALUES (296837970, 'Caio Dias Cavalcanti', 'CaioDiasCavalcanti@gmail.com', 912473554);
+VALUES (296837970, 'José Silva', 'josesilva@gmail.com', 912473554, 'Boticas', 'Vila Real');
 INSERT INTO CLIENTE
-VALUES (228897904, 'Lucas Ribeiro Castro', 'LucasRibeiroCastro@hotmail.com', 924716586);
+VALUES (228897904, 'Lucas Ribeiro Castro', 'LucasRibeiroCastro@hotmail.com', 924716586, 'Moreira da Maia', 'Porto');
 INSERT INTO CLIENTE
-VALUES (275784703, 'Eduardo Santos Costa', 'EduardoSantosCosta@sapo.pt', 935794318);
+VALUES (275784703, 'Eduardo Santos Costa', 'EduardoSantosCosta@sapo.pt', 935794318, 'Cascais', 'Lisboa');
 --CENTRO
 INSERT INTO CLIENTE
-VALUES (295488077, 'Tiago José Coentro', 'tiagojosecoentro@gmail.com', 935478945);
+VALUES (295488077, 'Tiago José Coentro', 'tiagojosecoentro@gmail.com', 935478945, 'Faro', 'Algarve');
 INSERT INTO CLIENTE
-VALUES (220347654, 'Fernado Pimenta Rodrigues', 'fernandopimentarodrigues@hotmail.com', 968789652);
+VALUES (220347654, 'Fernado Pimenta Rodrigues', 'fernandopimentarodrigues@hotmail.com', 968789652, 'Alenquer',
+        'Lisboa');
 INSERT INTO CLIENTE
-VALUES (294772545, 'Bernardo José Sousa', 'bernardojosesousa@sapo.pt', 965449848);
+VALUES (294772545, 'Bernardo José Sousa', 'bernardojosesousa@sapo.pt', 965449848, 'Armamar', 'Viseu');
 --SUL
 INSERT INTO CLIENTE
-VALUES (294727183, 'Ivone Teresa Costa', 'ivoneteresacosta@gmail.com', 963724517);
+VALUES (294727183, 'Ivone Teresa Costa', 'ivoneteresacosta@gmail.com', 963724517, 'Batalha', 'Leiria');
 INSERT INTO CLIENTE
-VALUES (245081569, 'Sandra Patrícia Costa', 'sandrinha69@sapo.pt', 912487931);
+VALUES (245081569, 'Sandra Patrícia Costa', 'sandrinha69@sapo.pt', 912487931, 'Pinhel', 'Guarda');
 INSERT INTO CLIENTE
-VALUES (241028752, 'Márcio José Almeida', 'marciojosealmeida@gmailF.com', 935497215);
+VALUES (241028752, 'Márcio José Almeida', 'marciojosealmeida@gmailF.com', 935497215, 'Macinhata do Vouga', 'Aveiro');
 
 --FUNCIONÁRIOS
 INSERT INTO FUNCIONARIO
@@ -47,6 +48,21 @@ VALUES (270770542, 'Gertrudes Teresa Moreira', 'Avenida Rocha Páris, 74 r/c 490
 INSERT INTO FUNCIONARIO
 VALUES (277456410, 'Josefina Teresa Costa', 'Urbanização Cidade Nova, Lote29 r/c 4935-087 Darque', 924169381,
         'josefinateresacosta@gmail.com');
+INSERT INTO FUNCIONARIO
+VALUES (269905529, 'Cristiano Ronaldo', 'Avenida Luís de Camões, 45 4900-474 Viana do Castelo', 912546716,
+        'olhaobicho@yahoo.com');
+INSERT INTO FUNCIONARIO
+VALUES (298739640, 'Marcelo Rebelo de Sousa', 'Rua da Picota, nº 41 4900-539 Viana do Castelo', 931245632,
+        'marceloreidatuga@sapo.pt');
+INSERT INTO FUNCIONARIO
+VALUES (283174587, 'Joe Biden', 'Rua João António de Andrade, 5 4520-161 Santa Maria da Feira', 925486245,
+        'potus@cia.com');
+INSERT INTO FUNCIONARIO
+VALUES (263656047, 'José Mourinho', 'Av. José Júlio, 281, sala 10-11 4560-547 Penafiel ', 932516982,
+        'specialOne@hotmail.com');
+INSERT INTO FUNCIONARIO
+VALUES (238417409, 'Quim Barreiros', 'Avenida Camilo Tavares Matos, 252 1E 3730-240 Vale de Cambra', 915746315,
+        'reidelas@sapo.pt');
 
 --CAMAREIRAS
 INSERT INTO CAMAREIRA
@@ -59,6 +75,18 @@ INSERT INTO CAMAREIRA
 VALUES (270770542);
 INSERT INTO CAMAREIRA
 VALUES (277456410);
+
+--FUNCIONARIOSMANUTENCAO
+INSERT INTO FUNCIONARIOMANUTENCAO
+VALUES (269905529, 921258135, 238417409);
+INSERT INTO FUNCIONARIOMANUTENCAO
+VALUES (298739640, 912563582, 263656047);
+INSERT INTO FUNCIONARIOMANUTENCAO
+VALUES (283174587, 932321661, 263656047);
+INSERT INTO FUNCIONARIOMANUTENCAO
+VALUES (263656047, 931242452, null);
+INSERT INTO FUNCIONARIOMANUTENCAO
+VALUES (238417409, 912472458, null);
 
 --PRODUTOS
 --BEBIDAS
@@ -282,21 +310,34 @@ VALUES (40, 2, 2, 20, 2);
 
 --RESERVAS 6 MESES ANTES
 INSERT INTO RESERVA
-VALUES (1, 296837970, 1, TO_DATE('2020/06/01', 'yyyy/mm/dd'), TO_DATE('2020/06/12', 'yyyy/mm/dd'), 1, 'Reservada',
+VALUES (1, 296837970, 1, TO_DATE('2020/06/01', 'yyyy/mm/dd'), TO_DATE('2020/06/12', 'yyyy/mm/dd'), 1, 'Finalizada',
         null);
 INSERT INTO RESERVA
-VALUES (2, 275784703, 2, TO_DATE('2020/06/13', 'yyyy/mm/dd'), TO_DATE('2020/06/21', 'yyyy/mm/dd'), 1, 'Reservada',
+VALUES (2, 275784703, 2, TO_DATE('2020/06/13', 'yyyy/mm/dd'), TO_DATE('2020/06/21', 'yyyy/mm/dd'), 1, 'Finalizada',
         null);
 INSERT INTO RESERVA
-VALUES (3, 220347654, 11, TO_DATE('2020/07/07', 'yyyy/mm/dd'), TO_DATE('2020/07/15', 'yyyy/mm/dd'), 2, 'Reservada',
+VALUES (3, 220347654, 11, TO_DATE('2020/07/07', 'yyyy/mm/dd'), TO_DATE('2020/07/15', 'yyyy/mm/dd'), 2, 'Finalizada',
         null);
 INSERT INTO RESERVA
-VALUES (4, 294772545, 12, TO_DATE('2020/08/01', 'yyyy/mm/dd'), TO_DATE('2020/08/15', 'yyyy/mm/dd'), 2, 'Reservada',
+VALUES (4, 294772545, 12, TO_DATE('2020/08/01', 'yyyy/mm/dd'), TO_DATE('2020/08/15', 'yyyy/mm/dd'), 2, 'Finalizada',
         null);
 --RESERVAS ANTES 6 MESES
 INSERT INTO RESERVA
-VALUES (5, 220347654, 3, TO_DATE('2020/01/01', 'yyyy/mm/dd'), TO_DATE('2020/01/16', 'yyyy/mm/dd'), 1, 'Reservada',
+VALUES (5, 220347654, 3, TO_DATE('2020/01/01', 'yyyy/mm/dd'), TO_DATE('2020/01/16', 'yyyy/mm/dd'), 1, 'Finalizada',
         null);
+INSERT INTO RESERVA
+VALUES (6, 296837970, 21, TO_DATE('2020/10/13', 'yyyy/mm/dd'), TO_DATE('2020/10/21', 'yyyy/mm/dd'), 1, 'Finalizada',
+        null);
+INSERT INTO RESERVA
+VALUES (7, 296837970, 16, TO_DATE('2020/10/12', 'yyyy/mm/dd'), TO_DATE('2020/10/14', 'yyyy/mm/dd'), 1, 'Finalizada',
+        null);
+INSERT INTO RESERVA
+VALUES (8, 296837970, 16, TO_DATE('2020/09/10', 'yyyy/mm/dd'), TO_DATE('2020/09/12', 'yyyy/mm/dd'), 1, 'Finalizada',
+        null);
+INSERT INTO RESERVA
+VALUES (9, 296837970, 16, TO_DATE('2020/11/17', 'yyyy/mm/dd'), TO_DATE('2020/11/25', 'yyyy/mm/dd'), 1, 'Reservada',
+        null);
+
 
 --CONTAS
 INSERT INTO CONTA
@@ -384,3 +425,33 @@ INSERT INTO PRECO
 VALUES (200, 2, 3);
 INSERT INTO PRECO
 VALUES (120, 2, 4);
+
+--PEDIDOSINTERVENCAO
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (1, 1, 'finalizado', TO_DATE('2020/06/02', 'yyyy/mm/dd'));
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (2, 1, 'finalizado', TO_DATE('2020/06/05', 'yyyy/mm/dd'));
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (3, 2, 'finalizado', TO_DATE('2020/07/13', 'yyyy/mm/dd'));
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (4, 3, 'finalizado', TO_DATE('2020/07/08', 'yyyy/mm/dd'));
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (5, 5, 'finalizado', TO_DATE('2020/06/02', 'yyyy/mm/dd'));
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (6, 7, 'finalizado', TO_DATE('2020/11/19', 'yyyy/mm/dd'));
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (7, 7, 'em aberto', TO_DATE('2020/11/20', 'yyyy/mm/dd'));
+
+--INTERVENCOESMANUTENCAO
+INSERT INTO INTERVENCAOMANUTENCAO
+VALUES (1, TO_DATE('2020/06/02', 'yyyy/mm/dd'), 269905529, 1);
+INSERT INTO INTERVENCAOMANUTENCAO
+VALUES (2, TO_DATE('2020/06/02', 'yyyy/mm/dd'), 238417409, 2);
+INSERT INTO INTERVENCAOMANUTENCAO
+VALUES (3, TO_DATE('2020/06/02', 'yyyy/mm/dd'), 263656047, 3);
+INSERT INTO INTERVENCAOMANUTENCAO
+VALUES (4, TO_DATE('2020/06/02', 'yyyy/mm/dd'), 263656047, 4);
+INSERT INTO INTERVENCAOMANUTENCAO
+VALUES (5, TO_DATE('2020/06/02', 'yyyy/mm/dd'), 269905529, 5);
+INSERT INTO INTERVENCAOMANUTENCAO
+VALUES (6, TO_DATE('2020/11/20', 'yyyy/mm/dd'), 283174587, 6);
