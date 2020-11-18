@@ -51,7 +51,7 @@ CREATE TABLE EpocaAno (
   DataFim    date NOT NULL, 
   PRIMARY KEY (Id));
 CREATE TABLE Reserva (
-  Id               varchar2(1) NOT NULL, 
+  Id               number(3) NOT NULL, 
   ClienteNif       number(9) NOT NULL, 
   QuartoId         number(2) NOT NULL, 
   DataInicio       date NOT NULL, 
@@ -70,14 +70,14 @@ CREATE TABLE Cliente (
   PRIMARY KEY (Nif));
 CREATE TABLE Conta (
   NumUnico     number(3) NOT NULL, 
-  ReservaId    varchar2(1) NOT NULL, 
+  ReservaId    number(3) NOT NULL, 
   DataAbertura date NOT NULL, 
   PRIMARY KEY (NumUnico));
 CREATE TABLE Fatura (
   Id             number(2) NOT NULL, 
   ValorConta     number(2) NOT NULL, 
   Data           date NOT NULL, 
-  ReservaId      varchar2(1) NOT NULL, 
+  ReservaId      number(3) NOT NULL, 
   ContaReservaId varchar2(1) NOT NULL, 
   ContaNumUnico  number(3) NOT NULL, 
   PRIMARY KEY (Id));
@@ -109,13 +109,13 @@ CREATE TABLE IntervencaoLimpeza (
   Id                  number(3) NOT NULL, 
   Data                date NOT NULL, 
   CamareiraNif        number(9) NOT NULL, 
-  PedidoIntervencaoId number(3), 
+  PedidoIntervencaoId number(3) NOT NULL, 
   PRIMARY KEY (Id));
 CREATE TABLE IntervencaoManutencao (
-  Id                      number(3) NOT NULL, 
-  Data                    date, 
-  FuncinarioManutencaoNif number(9) NOT NULL, 
-  PedidoIntervencaoId     number(3) NOT NULL, 
+  Id                       number(3) NOT NULL, 
+  Data                     date NOT NULL, 
+  FuncionarioManutencaoNif number(9) NOT NULL, 
+  PedidoIntervencaoId      number(3) NOT NULL, 
   PRIMARY KEY (Id));
 CREATE TABLE DespesaFrigobar (
   Data                    date NOT NULL, 
@@ -130,10 +130,11 @@ CREATE TABLE Funcionario (
   Email    varchar2(40) NOT NULL, 
   PRIMARY KEY (Nif));
 CREATE TABLE PedidoIntervencao (
-  Id        number(3) NOT NULL, 
-  ReservaId varchar2(1) NOT NULL, 
-  Estado    varchar2(15), 
-  Data      date, 
+  Id             number(3) NOT NULL, 
+  ReservaId      number(3) NOT NULL, 
+  Estado         varchar2(15), 
+  Data           date, 
+  FuncionarioNif number(9) NOT NULL, 
   PRIMARY KEY (Id));
 CREATE TABLE Produto (
   Id    number(3) NOT NULL, 
@@ -158,10 +159,11 @@ ALTER TABLE Camareira ADD CONSTRAINT camareiraNifFuncionario FOREIGN KEY (Funcio
 ALTER TABLE FuncionarioManutencao ADD CONSTRAINT funcionarioManutencaoNifFuncionario FOREIGN KEY (FuncionarioNif) REFERENCES Funcionario (Nif);
 ALTER TABLE FuncionarioRestauracao ADD CONSTRAINT funcionarioRestauracaoNifFuncionario FOREIGN KEY (FuncionarioNif) REFERENCES Funcionario (Nif);
 ALTER TABLE FuncionarioRececao ADD CONSTRAINT funcionarioRececaoNifFuncionario FOREIGN KEY (FuncionarioNif) REFERENCES Funcionario (Nif);
-ALTER TABLE IntervencaoManutencao ADD CONSTRAINT intervencaoManutencaoNifFuncionario FOREIGN KEY (FuncinarioManutencaoNif) REFERENCES FuncionarioManutencao (FuncionarioNif);
+ALTER TABLE IntervencaoManutencao ADD CONSTRAINT intervencaoManutencaoNifFuncionario FOREIGN KEY (FuncionarioManutencaoNif) REFERENCES FuncionarioManutencao (FuncionarioNif);
 ALTER TABLE PedidoIntervencao ADD CONSTRAINT pedidoIntervencaoIdReserva FOREIGN KEY (ReservaId) REFERENCES Reserva (Id);
 ALTER TABLE Pagamento ADD CONSTRAINT pagamentoIdFatura FOREIGN KEY (FaturaId) REFERENCES Fatura (Id);
 ALTER TABLE IntervencaoManutencao ADD CONSTRAINT intervencaoManutencaoIdPedidoIntervencao FOREIGN KEY (PedidoIntervencaoId) REFERENCES PedidoIntervencao (Id);
 ALTER TABLE DespesaFrigobar ADD CONSTRAINT despesaFrigobarIdProduto FOREIGN KEY (ProdutoId) REFERENCES Produto (Id);
 ALTER TABLE IntervencaoLimpeza ADD CONSTRAINT intervencaoLimpezaIdPedidoIntervencao FOREIGN KEY (PedidoIntervencaoId) REFERENCES PedidoIntervencao (Id);
 ALTER TABLE DespesaFrigobar ADD CONSTRAINT despesaFrigobarNifCamareira FOREIGN KEY (CamareiraFuncionarioNif) REFERENCES Camareira (FuncionarioNif);
+ALTER TABLE PedidoIntervencao ADD CONSTRAINT FKPedidoInte425898 FOREIGN KEY (FuncionarioNif) REFERENCES Funcionario (Nif);

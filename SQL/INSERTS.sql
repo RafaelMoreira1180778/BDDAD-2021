@@ -337,6 +337,18 @@ VALUES (8, 296837970, 16, TO_DATE('2020/09/10', 'yyyy/mm/dd'), TO_DATE('2020/09/
 INSERT INTO RESERVA
 VALUES (9, 296837970, 16, TO_DATE('2020/11/17', 'yyyy/mm/dd'), TO_DATE('2020/11/25', 'yyyy/mm/dd'), 1, 'Reservada',
         null);
+INSERT INTO RESERVA
+VALUES (10, 228897904, 16, TO_DATE('2020/11/16', 'yyyy/mm/dd'), TO_DATE('2020/11/22', 'yyyy/mm/dd'), 1, 'Reservada',
+        null);
+INSERT INTO RESERVA
+VALUES (11, 241028752, 16, TO_DATE('2020/11/12', 'yyyy/mm/dd'), TO_DATE('2020/11/30', 'yyyy/mm/dd'), 1, 'Reservada',
+        null);
+INSERT INTO RESERVA
+VALUES (12, 294772545, 16, TO_DATE('2020/11/11', 'yyyy/mm/dd'), TO_DATE('2020/11/14', 'yyyy/mm/dd'), 1, 'Reservada',
+        null);
+INSERT INTO RESERVA
+VALUES (13, 220347654, 16, TO_DATE('2020/11/18', 'yyyy/mm/dd'), TO_DATE('2020/11/21', 'yyyy/mm/dd'), 1, 'Reservada',
+        null);
 
 
 --CONTAS
@@ -428,19 +440,31 @@ VALUES (120, 2, 4);
 
 --PEDIDOSINTERVENCAO
 INSERT INTO PEDIDOINTERVENCAO
-VALUES (1, 1, 'finalizado', TO_DATE('2020/06/02', 'yyyy/mm/dd'));
+VALUES (1, 1, 'finalizado', TO_DATE('2020/06/02', 'yyyy/mm/dd'), 269905529);
 INSERT INTO PEDIDOINTERVENCAO
-VALUES (2, 1, 'finalizado', TO_DATE('2020/06/05', 'yyyy/mm/dd'));
+VALUES (2, 1, 'finalizado', TO_DATE('2020/06/05', 'yyyy/mm/dd'), 238417409);
 INSERT INTO PEDIDOINTERVENCAO
-VALUES (3, 2, 'finalizado', TO_DATE('2020/07/13', 'yyyy/mm/dd'));
+VALUES (3, 2, 'finalizado', TO_DATE('2020/07/13', 'yyyy/mm/dd'), 263656047);
 INSERT INTO PEDIDOINTERVENCAO
-VALUES (4, 3, 'finalizado', TO_DATE('2020/07/08', 'yyyy/mm/dd'));
+VALUES (4, 3, 'finalizado', TO_DATE('2020/07/08', 'yyyy/mm/dd'), 263656047);
 INSERT INTO PEDIDOINTERVENCAO
-VALUES (5, 5, 'finalizado', TO_DATE('2020/06/02', 'yyyy/mm/dd'));
+VALUES (5, 5, 'finalizado', TO_DATE('2020/06/02', 'yyyy/mm/dd'), 269905529);
 INSERT INTO PEDIDOINTERVENCAO
-VALUES (6, 7, 'finalizado', TO_DATE('2020/11/19', 'yyyy/mm/dd'));
+VALUES (6, 7, 'finalizado', TO_DATE('2020/10/13', 'yyyy/mm/dd'), 283174587);
 INSERT INTO PEDIDOINTERVENCAO
-VALUES (7, 7, 'em aberto', TO_DATE('2020/11/20', 'yyyy/mm/dd'));
+VALUES (7, 8, 'finalizado', TO_DATE('2020/09/11', 'yyyy/mm/dd'), 263656047);
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (8, 9, 'em aberto', TO_DATE('2020/11/20', 'yyyy/mm/dd'), 269905529);
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (9, 10, 'em aberto', TO_DATE('2020/11/17', 'yyyy/mm/dd'), 283174587);
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (10, 11, 'em aberto', TO_DATE('2020/11/20', 'yyyy/mm/dd'), 298739640);
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (11, 12, 'em aberto', TO_DATE('2020/11/13', 'yyyy/mm/dd'), 238417409);
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (12, 13, 'em aberto', TO_DATE('2020/11/18', 'yyyy/mm/dd'), 283174587);
+INSERT INTO PEDIDOINTERVENCAO
+VALUES (13, 13, 'em aberto', TO_DATE('2020/11/19', 'yyyy/mm/dd'), 238417409);
 
 --INTERVENCOESMANUTENCAO
 INSERT INTO INTERVENCAOMANUTENCAO
