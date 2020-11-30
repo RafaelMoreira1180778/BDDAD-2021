@@ -1,0 +1,15 @@
+--2
+WITH NUM_MEDICAMENTOS AS (SELECT mr.IDCONSULTA,
+                                 COUNT(mr.IDMEDICAMENTO)     AS NR_MEDICAMENTOS_RECEITADOS,
+                                 (SELECT c.IDMEDICO
+                                  FROM CONSULTA c
+                                  WHERE c.IDCONSULTA
+                                            = mr.IDCONSULTA) AS IDMEDICO
+                          FROM MEDICAMENTORECEITADO mr
+                          GROUP BY mr.IDCONSULTA)
+SELECT m.NOME, MAX(nm.NR_MEDICAMENTOS_RECEITADOS)
+FROM NUM_MEDICAMENTOS nm
+         JOIN MEDICO m ON m.IDMEDICO = nm.IDMEDICO
+GROUP BY m.NOME, nm.NR_MEDICAMENTOS_RECEITADOS
+HAVING MAX(nm.NR_MEDICAMENTOS_RECEITADOS) = MIN(nm.NR_MEDICAMENTOS_RECEITADOS)
+ORDER BY m.NOME;
