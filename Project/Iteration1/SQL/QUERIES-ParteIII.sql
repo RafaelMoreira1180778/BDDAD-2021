@@ -1,0 +1,37 @@
+--A
+WITH CONTAGEM_QUARTO_POR_ID AS
+         (SELECT q.ID, COUNT(r.QUARTOID) AS NUM_RESERVAS, q.TIPOQUARTOID, q.NUMEROQUARTOANDARID
+          FROM RESERVA r
+                   INNER JOIN QUARTO q on q.ID = r.QUARTOID
+          GROUP BY q.ID, q.TIPOQUARTOID, q.NUMEROQUARTOANDARID)
+SELECT t.TIPOQUARTOID                                                            AS "TIPO DE QUARTO",
+       t.NUMEROQUARTOANDARID                                                     AS "ANDAR",
+       MAX(t.ID) KEEP (DENSE_RANK FIRST ORDER BY t.NUM_RESERVAS DESC NULLS LAST) as "ID"
+FROM CONTAGEM_QUARTO_POR_ID t
+WHERE (t.TIPOQUARTOID <> 1)
+  AND (t.NUM_RESERVAS > 2)
+GROUP BY t.TIPOQUARTOID, t.NUMEROQUARTOANDARID;
+
+--B
+WITH VALOR_CONSUMO AS (SELECT SUM(p.CUSTO) AS CONSUMO, c3.RESERVAID
+                       FROM DESPESAFRIGOBAR d2
+                                INNER JOIN PRODUTO p on d2.PRODUTOID = p.ID
+                                INNER JOIN CONTA c3 on c3.NUMUNICO = d2.CONTANUMUNICO
+                       GROUP BY d2.CONTANUMUNICO, c3.RESERVAID)
+SELECT c.NOME, vc.CONSUMO
+FROM CLIENTE c
+         INNER JOIN RESERVA r ON c.NIF = r.CLIENTENIF
+         JOIN VALOR_CONSUMO vc ON vc.RESERVAID = r.ID
+WHERE c.NIF IN (SELECT r2.CLIENTENIF
+                FROM RESERVA r2
+                         INNER JOIN CONTA c2 on r2.ID = c2.RESERVAID
+                         INNER JOIN DESPESAFRIGOBAR d2 on c2.NUMUNICO = d2.CONTANUMUNICO
+                WHERE d2.PRODUTOID IN (SELECT COUNT(d.PRODUTOID)
+                                       FROM DESPESAFRIGOBAR d
+                                       WHERE d.DATA > ADD_MONTHS(SYSDATE, -24)
+                                       GROUP BY d.PRODUTOID
+                                       ORDER BY COUNT(d.PRODUTOID) DESC
+                                           FETCH FIRST 2 ROWS ONLY))
+  AND (r.DATAINICIO BETWEEN (SELECT e.DATAINICIO FROM EPOCAANO e WHERE e.ID = 2) AND (SELECT e.DATAFIM FROM EPOCAANO e WHERE e.ID = 2))
+GROUP BY c.NOME, vc.CONSUMO
+ORDER BY vc.CONSUMO DESC;
